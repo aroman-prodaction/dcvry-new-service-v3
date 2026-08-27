@@ -489,7 +489,7 @@ export default function App() {
           <div>
             {/* Room Card */}
             <div className="tl-card overflow-hidden mb-4 md:mb-6 flex flex-col min-[580px]:flex-row">
-              <div className="flex-1 p-[20px]">
+              <div className="flex-1 p-[16px]">
                 <div className="flex items-start justify-between mb-[12px]">
                   <div className="flex-1">
                     <h2 className="tl-title mb-[8px]" style={{ fontSize: '18px', lineHeight: '24px', fontWeight: 'var(--font-weight-normal)' }}>
@@ -510,7 +510,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="tl-meta flex gap-[16px] flex-wrap mb-[16px]">
+                <div className="tl-meta flex gap-[16px] flex-wrap">
                   <div className="flex items-center gap-[6px]">
                     <Bath size={14} />
                     <span style={{ fontSize: '12px', lineHeight: '16px' }}>Ванная комната</span>
@@ -532,7 +532,7 @@ export default function App() {
               <img
                 src={roomImage}
                 alt="Стандарт с двуспальной кроватью"
-                className="w-full h-[180px] min-[580px]:w-[160px] min-[580px]:h-[160px] object-cover"
+                className="w-full h-[180px] min-[580px]:w-[120px] min-[580px]:h-[120px] object-cover"
               />
             </div>
 

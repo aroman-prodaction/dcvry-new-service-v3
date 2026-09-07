@@ -493,8 +493,8 @@ export default function App() {
           {/* Room Card + Services Section */}
           <div>
             {/* Room Card */}
-            <div className="tl-card overflow-hidden mb-4 md:mb-6 flex flex-col min-[580px]:flex-row">
-              <div className="flex-1 p-[16px]">
+            <div className="tl-card overflow-hidden mb-4 md:mb-6 flex flex-row">
+              <div className="min-w-0 flex-1 p-[16px]">
                 <div className="flex items-start justify-between mb-[12px]">
                   <div className="flex-1">
                     <h2 className="tl-title mb-[8px]" style={{ fontSize: '18px', lineHeight: '24px', fontWeight: 'var(--font-weight-normal)' }}>
@@ -537,7 +537,7 @@ export default function App() {
               <img
                 src={roomImage}
                 alt="Стандарт с двуспальной кроватью"
-                className="w-full h-[180px] min-[580px]:w-[120px] min-[580px]:h-[120px] object-cover"
+                className="h-[120px] w-[120px] shrink-0 object-cover"
               />
             </div>
 

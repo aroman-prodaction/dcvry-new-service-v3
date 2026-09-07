@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Lock, User, Wifi, Wind, Car, Users, Clock, Plus, Check, Bath, X, Calendar, UserCheck, Trash2, Pencil, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Lock, User, Wifi, Wind, Car, Users, Clock, Plus, Check, Bath, X, Calendar, UserCheck, Trash2, Pencil, ExternalLink, Heart } from 'lucide-react';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import breakfastImage from '../assets/e92e76d334fc055c8e55cca12eed5e4adc81d980.png';
@@ -336,6 +336,7 @@ export default function App() {
   const [isMobileCartExpanded, setIsMobileCartExpanded] = useState(false);
   const [isRoomDetailsExpanded, setIsRoomDetailsExpanded] = useState(true);
   const [infoService, setInfoService] = useState<any | null>(null);
+  const [isBookingComplete, setIsBookingComplete] = useState(false);
   const cartScrollRef = React.useRef<HTMLDivElement>(null);
 
   const roomPrice = GUESTS.reduce((sum, guest) => sum + guest.tariffPrice, 0);
@@ -429,6 +430,10 @@ export default function App() {
       setExpandedServiceId(service.id);
     }
   };
+
+  if (isBookingComplete) {
+    return <BookingSuccessScreen />;
+  }
 
   return (
     <div className="tl-page-shell min-h-screen flex flex-col pb-[132px] md:pb-0">
@@ -801,7 +806,12 @@ export default function App() {
                   <div className="tl-meta mb-[16px]" style={{ fontSize: '12px', lineHeight: '16px' }}>
                     Налоги и сборы включены
                   </div>
-                  <button className="tl-primary-button w-full py-[10px] transition-all" style={{ fontSize: '14px', lineHeight: '20px', fontWeight: 'var(--font-weight-normal)' }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsBookingComplete(true)}
+                    className="tl-primary-button w-full py-[10px] transition-all"
+                    style={{ fontSize: '14px', lineHeight: '20px', fontWeight: 'var(--font-weight-normal)' }}
+                  >
                     Продолжить
                   </button>
                 </div>
@@ -817,6 +827,7 @@ export default function App() {
         grandTotal={grandTotal}
         isExpanded={isMobileCartExpanded}
         onToggle={() => setIsMobileCartExpanded(prev => !prev)}
+        onContinue={() => setIsBookingComplete(true)}
       />
 
       {infoService && (
@@ -827,6 +838,24 @@ export default function App() {
       )}
 
     </div>
+  );
+}
+
+function BookingSuccessScreen() {
+  return (
+    <main className="tl-success-screen" aria-labelledby="booking-success-title">
+      <div className="tl-success-content">
+        <div className="tl-success-icon" aria-hidden="true">
+          <Heart size={44} />
+        </div>
+        <h1 id="booking-success-title" className="tl-success-title">
+          Спасибо!
+        </h1>
+        <p className="tl-success-subtitle">
+          Вы прекрасны!
+        </p>
+      </div>
+    </main>
   );
 }
 
@@ -868,7 +897,7 @@ function ServiceInfoModal({ service, onClose }: any) {
   );
 }
 
-function MobileBookingCart({ cartItems, roomPrice, grandTotal, isExpanded, onToggle }: any) {
+function MobileBookingCart({ cartItems, roomPrice, grandTotal, isExpanded, onToggle, onContinue }: any) {
   const commonRows = getCommonServiceRows(cartItems);
 
   return (
@@ -1008,7 +1037,12 @@ function MobileBookingCart({ cartItems, roomPrice, grandTotal, isExpanded, onTog
           </div>
         </div>
 
-        <button className="tl-primary-button tl-mobile-cart-continue w-full transition-all" style={{ fontWeight: 'var(--font-weight-normal)' }}>
+        <button
+          type="button"
+          onClick={onContinue}
+          className="tl-primary-button tl-mobile-cart-continue w-full transition-all"
+          style={{ fontWeight: 'var(--font-weight-normal)' }}
+        >
           Продолжить
         </button>
       </div>

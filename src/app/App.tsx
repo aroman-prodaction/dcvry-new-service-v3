@@ -122,7 +122,7 @@ const SERVICES = [
   {
     id: 'horse-riding',
     title: 'Конная прогулка',
-    basePrice: 9000,
+    basePrice: 2000,
     adultPrice: 3500,
     childPrice: 2000,
     priceLabel: '3 гостя',
@@ -132,6 +132,7 @@ const SERVICES = [
     configType: 'age_price_live',
     badge: 'С инструктором',
     prefillBookingGuests: true,
+    showFromPrice: true,
   },
   {
     id: 'bath',
@@ -548,7 +549,7 @@ export default function App() {
 	                const isSelected = serviceItems.length > 0;
 	                const isExpanded = expandedServiceId === service.id;
 	                const isLiveAgePrice = service.configType === 'age_price_live';
-	                const showAddButton = !isSelected;
+	                const showAddButton = !isSelected || isLiveAgePrice;
 	                const showMoreButton = isSelected && service.configType !== 'per_guest' && !isLiveAgePrice;
 	                const selectedPrice = serviceItems.reduce((sum, item) => sum + item.finalPrice, 0);
 
